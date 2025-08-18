@@ -26,7 +26,7 @@ npm install
 
 ```
 ## 📂 Project Structure
-.
+```
 ├── components    # Reusable UI components
 ├── app         # Next.js pages
 |
