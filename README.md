@@ -19,7 +19,7 @@ Follow these steps to set up the project locally:
 
 ### 1️⃣ Clone the repository
 ```bash
-git clone https://github.com/Nathanmedo/yabatech-faq-dashboard.git
+git clone https://github.com/Nathanmedo/yabatech-faq-admin-dashboard.git
 cd yabatech-faq-dashboard
 
 npm install
