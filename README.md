@@ -23,6 +23,7 @@ git clone https://github.com/Nathanmedo/yabatech-faq-dashboard.git
 cd yabatech-faq-dashboard
 
 npm install
+npm run dev
 
 ```
 ## 📂 Project Structure
