@@ -19,16 +19,18 @@ Follow these steps to set up the project locally:
 
 ### 1️⃣ Clone the repository
 ```bash
-git clone https://github.com/your-username/yabatech-faq-dashboard.git
+git clone https://github.com/Nathanmedo/yabatech-faq-dashboard.git
 cd yabatech-faq-dashboard
 
 npm install
 
-
+```
 ## 📂 Project Structure
 .
 ├── components    # Reusable UI components
-├── pages         # Next.js pages
+├── app         # Next.js pages
+|
 ├── public        # Static assets
 ├── styles        # Global styles
 └── utils         # Helper functions
+please note that all constant variables are stored in the constants folder
