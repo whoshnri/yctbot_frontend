@@ -1,0 +1,1 @@
+export const ADMIN_PASSWORD = "yabatech-admin-2024"
