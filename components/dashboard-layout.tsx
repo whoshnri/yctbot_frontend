@@ -10,11 +10,9 @@ import { Button } from "@/components/ui/button"
 import { LayoutDashboard, BookOpen, BarChart3, GraduationCap, Settings, Menu, Bot, LogOut } from "lucide-react"
 
 const navigation = [
-  { name: "Dashboard", href: "/", icon: LayoutDashboard },
-  { name: "Knowledge Base", href: "/knowledge", icon: BookOpen },
-  { name: "Analytics", href: "/analytics", icon: BarChart3 },
-  { name: "Training", href: "/training", icon: GraduationCap },
-  { name: "Settings", href: "/settings", icon: Settings },
+  { name: "Analytics", href: "/admin/", icon: BarChart3 },
+  { name: "Knowledge Base", href: "/admin/knowledge", icon: BookOpen },
+  { name: "Training", href: "/admin/training", icon: GraduationCap },
 ]
 
 interface DashboardLayoutProps {
@@ -33,10 +31,10 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
   }
 
   return (
-    <div className="min-h-screen bg-background dark">
+    <div className="min-h-screen bg-background">
       {/* Mobile sidebar overlay */}
       {sidebarOpen && (
-        <div className="fixed inset-0 z-40 bg-black/50 lg:hidden" onClick={() => setSidebarOpen(false)} />
+        <div className="fixed inset-0 z-40 lg:hidden" onClick={() => setSidebarOpen(false)} />
       )}
 
       {/* Sidebar */}
@@ -69,7 +67,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
                   className={cn(
                     "flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
                     isActive
-                      ? "bg-sidebar-primary text-sidebar-primary-foreground"
+                      ? "bg-[#4caf50] text-sidebar-primary-foreground"
                       : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
                   )}
                   onClick={() => setSidebarOpen(false)}

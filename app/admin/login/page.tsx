@@ -8,35 +8,40 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { ADMIN_PASSWORD } from "@/constants/variables"
 
 export default function LoginPage() {
   const [password, setPassword] = useState("")
+  const [email, setEmail] = useState("")
   const [error, setError] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsLoading(true)
-    setError("")
+const handleLogin = async (e: React.FormEvent) => {
+  e.preventDefault()
+  setIsLoading(true)
+  setError("")
 
-    if (password === ADMIN_PASSWORD) {
-      // Generate random session ID
-      const sessionId = Math.random().toString(36).substring(2) + Date.now().toString(36)
+  const res = await fetch(`${API_URL}/login`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ password: password, email : email }),
+  })
 
-      // Set cookie for 1 day
-      const expires = new Date()
-      expires.setDate(expires.getDate() + 1)
-      document.cookie = `admin-session=${sessionId}; expires=${expires.toUTCString()}; path=/; secure; samesite=strict`
+    const results:any = await res.json()
 
-      router.push("/")
-    } else {
-      setError("Invalid access code. Please try again.")
-    }
-
-    setIsLoading(false)
+  if (res.ok) {
+    document.cookie = `admin-session=yourSessionValue; path=/; max-age=86400; secure; samesite=strict`
+    console.log(document.cookie)
+    router.push("/admin")
+  } else if (res.status == 404){
+    console.log(results)
+    setError(results.message)
   }
+
+  setIsLoading(false)
+}
+
 
 
   return (
@@ -60,10 +65,19 @@ export default function LoginPage() {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleLogin} className="space-y-4">
-            <div>
+            <div className="space-y-2">
+              
+              <Input
+                type="email"
+                placeholder="Enter email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-400"
+                required
+              />
               <Input
                 type="password"
-                placeholder="Enter access code"
+                placeholder="Enter password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-400"
