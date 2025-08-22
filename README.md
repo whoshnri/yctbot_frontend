@@ -35,3 +35,4 @@ npm run dev
 ├── styles        # Global styles
 └── utils         # Helper functions
 please note that all constant variables are stored in the constants folder
+# yctbot_frontend
