@@ -235,7 +235,7 @@ export default function KnowledgePage() {
                   <SelectContent>
                     {categories.map((cat) => (
                       <SelectItem key={cat} value={cat}>
-                        {cat}
+                       {cat || "Uncategorized"}
                       </SelectItem>
                     ))}
                   </SelectContent>
