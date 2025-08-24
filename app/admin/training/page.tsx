@@ -55,7 +55,7 @@ export default function TrainingPage() {
       })
       const data = await res.json()
 
-      if (data.status === 1) {
+      if (res.ok) {
         setUnanswered((prev) => prev.filter((item) => item.id !== q.id))
         setAnswers((prev) => {
           const copy = { ...prev }
@@ -69,6 +69,27 @@ export default function TrainingPage() {
       console.error("Failed to save answer:", err)
     } finally {
       setSavingId(null)
+    }
+  }
+
+  const handleDeleteQuestion = async (id: number) => {
+    if (!id) return;
+
+    try {
+      const res = await fetch(`${API_URL}/delete-unanswered`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id }),
+      });
+
+      if (res.ok) {
+        setUnanswered((prev) => prev.filter((item) => item.id !== id));
+      } else {
+        const data = await res.json();
+        alert(data.message || "Something went wrong");
+      }
+    } catch (err) {
+      console.error("Failed to delete question:", err);
     }
   }
 
@@ -156,7 +177,7 @@ export default function TrainingPage() {
                         <Button
                           variant="outline"
                           onClick={() =>
-                            setUnanswered((prev) => prev.filter((item) => item.id !== q.id))
+                            handleDeleteQuestion(q.id)
                           }
                         >
                           Mark as Irrelevant
